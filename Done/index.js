@@ -973,7 +973,7 @@ function dispatch(intentRequest, callback) {
     else {
     callback(elicit.close(intentRequest.sessionAttributes, 'Fulfilled', {
                         contentType: 'PlainText',
-                        content: `<div>Let's call the Service Desk to check out your issue.
+                        content: `<div>Let's call the Service Desk for better support!
                     					 
                                         <a href="tel:559-278-5000">559.278.5000</a>
                     			    </div>
