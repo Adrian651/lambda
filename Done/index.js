@@ -898,7 +898,7 @@ function dispatch(intentRequest, callback) {
     } else if (name === "Voicemail") {
     callback(elicit.close(intentRequest.sessionAttributes, 'Fulfilled', {
                         contentType: 'PlainText',
-                        content: `<div>Let's call the Service Desk to check out your Voicemail issue.
+                        content: `<div>Let's call the Service Desk for phone support.
                                         <a href="tel:559-278-5000">559.278.5000</a>
                     				</div>
                     				<div> Or <a href="http://fresnostate.edu/help/fac-staff/work-orders/general_workorder.html" target="_blank">Click Here</a>
