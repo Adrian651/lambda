@@ -42,40 +42,39 @@ module.exports = {
             };
         }
     },
-    elicitIntent: function(sessionAttributes, intentToElicit, message) {
+    elicitIntent: function(sessionAttributes, message) {
         return {
             sessionAttributes,
             dialogAction: {
                 type: 'ElicitIntent',
-                intentToElicit,
                 message,
             },
         };
     },
-    confirmIntent: function(sessionAttributes, slots, intentName, message) {
+    confirmIntent: function(sessionAttributes, intentName, message) {
         return {
             sessionAttributes,
             dialogAction: {
                 type: "ConfirmIntent",
-                message,
-                slots,
+                //slots,
                 intentName,
-                responseCard : {
+                message,
+                // responseCard : {
                     
-                    contentType: "application/vnd.amazonaws.card.generic",
-                    genericAttachments: [
-                      {
-                         title:"card-title",
-                         subTitle:"card-sub-title",
-                         buttons:[ 
-                             {
-                                "text":"button-text",
-                                "value":"Value sent to server on button click"
-                             }
-                          ]
-                       } 
-                   ] 
-                }//end response card
+                //     contentType: "application/vnd.amazonaws.card.generic",
+                //     genericAttachments: [
+                //       {
+                //          title:"card-title",
+                //          subTitle:"card-sub-title",
+                //          buttons:[ 
+                //              {
+                //                 "text":"button-text",
+                //                 "value":"Value sent to server on button click"
+                //              }
+                //           ]
+                //       } 
+                //   ] 
+                // }//end response card
                 
             }//dialog action
         };//end return

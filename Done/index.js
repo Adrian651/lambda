@@ -7,15 +7,18 @@ function changePassword(intentRequest, callback) {
     var knowId = intentRequest.currentIntent.slots.service;
     var knowId = intentRequest.currentIntent.slots.ID;
     if (account === 'AD') {
-        callback(elicit.close(intentRequest.sessionAttributes, 'Fulfilled', {
-                contentType: 'PlainText',
-                content: `<div>Let's call the Service Desk to check out your issue.
-                    			<a href="tel:559-278-5000">559.278.5000</a>
-                                </div>
-                    		<div> Or <a href="http://fresnostate.edu/help/fac-staff/work-orders/general_workorder.html" target="_blank">Click Here</a>
-                    				        to submit a workorder.</div>`
-                }));
-    } else if (account !== null) {
+        
+        //(sessionAttributes, intentName, slots, slotToElicit, message) 
+        callback(elicit.confirmIntent(intentRequest.sessionAttributes, 'hangUp',  {
+              contentType: 'PlainText',
+            content: `<div>Let's call the Service Desk to check out your issue.
+                    	<a href="tel:559-278-5000">559.278.5000</a>
+                        </div>
+                    	<div> Or <a href="http://fresnostate.edu/help/fac-staff/work-orders/general_workorder.html" target="_blank">Click Here</a>
+                    			to submit a workorder.</div>
+                    	<div>Is there anything else we can help you with today?</div>`
+        }));
+    }else if (account !== null) {
         if (account === 'myfresnostate' || account === 'blackboard' || account === "email" || account === "wifi" || account === "box") {
             if (knowId === null) {
                 callback(elicit.elicitSlot(intentRequest.sessionAttributes, intentName, intentRequest.currentIntent.slots, "ID"));
@@ -40,11 +43,11 @@ function changePassword(intentRequest, callback) {
                 return;
             }
         } else {
-callback(elicit.close(intentRequest.sessionAttributes, 'Fulfilled', {
+                callback(elicit.close(intentRequest.sessionAttributes, 'Fulfilled', {
                         contentType: 'PlainText',
                         content: `<div>Let's call the Service Desk to check out your issue.
                     					 
-<a href="tel:559-278-5000">559.278.5000</a>
+                                        <a href="tel:559-278-5000">559.278.5000</a>
                     						</div>
                     						<div> Or <a href="http://fresnostate.edu/help/fac-staff/work-orders/general_workorder.html" target="_blank">Click Here</a>
                     					        to submit a workorder.</div>`
@@ -574,6 +577,7 @@ function peoplesoftStudent(intentRequest, callback) {
         var support = intentRequest.currentIntent.slots.support;
         var browser = intentRequest.currentIntent.slots.browser;
         
+        if(student_enrollment !==null) student_issue = "registration";
         if (student_issue === null) {
             callback(elicit.elicitSlot(intentRequest.sessionAttributes, name, intentRequest.currentIntent.slots, "student_Issue"));
         } else if (student_issue === "registration") {
